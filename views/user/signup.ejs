@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Slide Animation */
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideOut {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+
+      to {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+    }
+
+    .step.active {
+      animation: slideIn 0.5s ease-out;
+      display: block;
+    }
+
+    .step.inactive {
+      animation: slideOut 0.5s ease-out;
+      display: none;
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      background: #e4e4e4;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+      height: 10px;
+      margin-bottom: 20px;
+    }
+
+    .progress-bar-fill {
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      height: 100%;
+      width: 0;
+      transition: width 0.3s ease-in-out;
+    }
+
+    /* Input Field Styling */
+    input {
+      border: 2px solid transparent;
+      transition: all 0.3s ease-in-out;
+    }
+
+    input:focus {
+      border-color: #00c853;
+      box-shadow: 0 0 8px rgba(0, 200, 83, 0.8);
+    }
+
+    input::placeholder {
+      color: #aaa;
+    }
+
+    /* Right Section Background with Green Gradient */
+    .right-section {
+      background: linear-gradient(to bottom right, #00c853, #00e676);
+      border-radius: 16px;
+    }
+
+    /* Container Styling */
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #121212;
+      color: white;
+    }
+  </style>
+</head>
+
+<body class="h-screen flex items-center justify-center">
+  <div class="w-full max-w-6xl mx-auto flex items-center justify-center px-4 md:px-0">
+
+    <!-- Left Section -->
+    <div class="w-1/2 text-white text-center space-y-8">
+      <div class="flex items-center justify-center space-x-3">
+        <!-- Logo -->
+        <div class="w-16 h-16 rounded-full bg-green-500 text-black font-bold flex items-center justify-center text-2xl">
+          Y
+        </div>
+        <!-- Logo Text -->
+        <h2 class="text-4xl font-semibold tracking-wide">Yadro</h2>
+      </div>
+      <!-- Main Heading -->
+      <h1 class="text-6xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-600">
+        Create<br>Account
+      </h1>
+      <p class="text-gray-400 text-lg leading-relaxed">
+        Join us now and explore the best experience.<br>
+        Your journey begins here.
+      </p>
+    </div>
+
+    <!-- Right Section -->
+    <div class="w-1/2">
+      <div class="right-section p-10 shadow-2xl fade-in">
+
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+          <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+
+        <!-- Form Steps -->
+        <form id="signup-form">
+          <!-- Step 1 -->
+          <div class="step active" id="step1">
+            <label for="full-name" class="text-white">What's your full name?</label>
+            <input type="text" id="full-name" placeholder="Full Name" class="w-full px-4 py-3 rounded-lg bg-white text-black mt-2">
+          </div>
+
+          <!-- Step 2 -->
+          <div class="step inactive" id="step2">
+            <label for="email" class="text-white">What's your email address?</label>
+            <input type="email" id="email" placeholder="Email Address" class="w-full px-4 py-3 rounded-lg bg-white text-black mt-2">
+          </div>
+
+          <!-- Step 3 -->
+          <div class="step inactive" id="step3">
+            <label for="phone" class="text-white">What's your phone number?</label>
+            <input type="tel" id="phone" placeholder="Phone Number" class="w-full px-4 py-3 rounded-lg bg-white text-black mt-2">
+          </div>
+
+          <!-- Step 4 -->
+          <div class="step inactive" id="step4">
+            <label for="password" class="text-white">Set a password</label>
+            <input type="password" id="password" placeholder="Password" class="w-full px-4 py-3 rounded-lg bg-white text-black mt-2">
+          </div>
+
+          <!-- Step 5 -->
+          <div class="step inactive" id="step5">
+            <label for="confirm-password" class="text-white">Confirm your password</label>
+            <input type="password" id="confirm-password" placeholder="Confirm Password" class="w-full px-4 py-3 rounded-lg bg-white text-black mt-2">
+            <button type="submit" class="button-next mt-5">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript for SPA Form -->
+  <script>
+    let currentStep = 1;
+    const steps = document.querySelectorAll('.step');
+    const progressBarFill = document.getElementById('progress-fill');
+
+    // Focus on the input of the first step
+    const focusOnStepInput = (step) => {
+      const input = steps[step].querySelector('input');
+      input.focus();
+    };
+
+    function nextStep(step) {
+      const input = steps[step - 1].querySelector('input');
+      if (input.value.trim() === '') {
+        alert('Please fill out this field.');
+        return;
+      }
+
+      // Hide current step
+      steps[step - 1].classList.remove('active');
+      steps[step - 1].classList.add('inactive');
+
+      // Show next step
+      steps[step].classList.remove('inactive');
+      steps[step].classList.add('active');
+
+      // Update progress bar
+      progressBarFill.style.width = `${((step + 1) / steps.length) * 100}%`;
+
+      // Focus on the next input field
+      focusOnStepInput(step);
+    }
+
+    // Listen for "Enter" key press
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (currentStep <= steps.length) {
+          nextStep(currentStep);
+          currentStep++;
+        }
+      }
+    });
+
+    // Form submission
+    document.getElementById('signup-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+
+      if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+      } else {
+        alert('Signup successful!');
+      }
+    });
+
+    // Focus on the first input field when the page loads
+    window.onload = () => {
+      focusOnStepInput(0); // Focus on the first input field
+    };
+  </script>
+</body>
+
+</html>
