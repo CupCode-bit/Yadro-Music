@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Slide Animation */
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideOut {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+    }
+
+    .step.active {
+      animation: slideIn 0.5s ease-out;
+      display: block;
+    }
+
+    .step.inactive {
+      animation: slideOut 0.5s ease-out;
+      display: none;
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      background: #e4e4e4;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+      height: 10px;
+      margin-bottom: 20px;
+    }
+
+    .progress-bar-fill {
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      height: 100%;
+      width: 0;
+      transition: width 0.3s ease-in-out;
+    }
+
+    /* Input Field Styling */
+    input {
+      border: 2px solid transparent;
+      transition: all 0.3s ease-in-out;
+    }
+
+    input:focus {
+      border-color: #00c853;
+      box-shadow: 0 0 8px rgba(0, 200, 83, 0.8);
+    }
+
+    input::placeholder {
+      color: #aaa;
+    }
+
+    /* Right Section Background with Green Gradient */
+    .right-section {
+      background: linear-gradient(to bottom right, #00c853, #00e676);
+      border-radius: 16px;
+    }
+
+    /* Container Styling */
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #121212;
+      color: white;
+    }
+
+    .signin-button {
+      background: #121212;
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .signin-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+
+<body class="h-screen flex items-center justify-center">
+  <div class="w-full max-w-6xl mx-auto flex items-center justify-center px-4 md:px-0">
+    
+    <!-- Left Section -->
+    <div class="w-1/2 text-white text-center space-y-8">
+      <div class="flex items-center justify-center space-x-3">
+        <!-- Logo -->
+        <div class="w-16 h-16 rounded-full bg-green-500 text-black font-bold flex items-center justify-center text-2xl">
+          Y
+        </div>
+        <!-- Logo Text -->
+        <h2 class="text-4xl font-semibold tracking-wide">Yadro</h2>
+      </div>
+      <!-- Main Heading -->
+      <h1 class="text-6xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-600">
+        Welcome<br>Back
+      </h1>
+      <p class="text-gray-400 text-lg leading-relaxed">
+        Sign in to continue your journey.<br>
+        We've missed you!
+      </p>
+    </div>
+
+    <!-- Right Section -->
+    <div class="w-1/2">
+      <div class="right-section p-10 shadow-2xl">
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+          <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+
+        <form id="signin-form" class="space-y-6">
+          <!-- Step 1: Email -->
+          <div class="step active" id="step1">
+            <label for="email" class="text-white text-lg">What's your email address?</label>
+            <input 
+              type="email" 
+              id="email" 
+              class="w-full px-4 py-3 rounded-lg bg-white text-black mt-2"
+              placeholder="Enter your email"
+              required
+            >
+          </div>
+
+          <!-- Step 2: Password -->
+          <div class="step inactive" id="step2">
+            <label for="password" class="text-white text-lg">Enter your password</label>
+            <input 
+              type="password" 
+              id="password" 
+              class="w-full px-4 py-3 rounded-lg bg-white text-black mt-2"
+              placeholder="Enter your password"
+              required
+            >
+            <div class="flex justify-between items-center mt-4">
+              <label class="flex items-center space-x-2">
+                <input type="checkbox" class="w-4 h-4">
+                <span class="text-white">Remember me</span>
+              </label>
+              <a href="#" class="text-white hover:text-green-200">Forgot password?</a>
+            </div>
+            <button 
+              type="submit" 
+              class="signin-button w-full py-3 rounded-lg font-semibold text-lg mt-6"
+            >
+              Sign In
+            </button>
+          </div>
+        </form>
+
+        <!-- Sign Up Link -->
+        <p class="text-center text-white mt-6">
+          Don't have an account? 
+          <a href="#" class="font-semibold hover:text-green-200">Sign up</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 1;
+    const steps = document.querySelectorAll('.step');
+    const progressBarFill = document.getElementById('progress-fill');
+
+    // Focus on the input of the current step
+    const focusOnStepInput = (step) => {
+      const input = steps[step].querySelector('input');
+      input.focus();
+    };
+
+    function nextStep(step) {
+      const input = steps[step - 1].querySelector('input');
+      
+      // Basic email validation for step 1
+      if (step === 1) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(input.value)) {
+          alert('Please enter a valid email address.');
+          return;
+        }
+      }
+
+      // Hide current step
+      steps[step - 1].classList.remove('active');
+      steps[step - 1].classList.add('inactive');
+
+      // Show next step
+      steps[step].classList.remove('inactive');
+      steps[step].classList.add('active');
+
+      // Update progress bar
+      progressBarFill.style.width = `${((step + 1) / steps.length) * 100}%`;
+
+      // Focus on the next input field
+      focusOnStepInput(step);
+    }
+
+    // Listen for "Enter" key press
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && currentStep < steps.length) {
+        e.preventDefault();
+        nextStep(currentStep);
+        currentStep++;
+      }
+    });
+
+    // Form submission
+    document.getElementById('signin-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      if (!email || !password) {
+        alert('Please fill in all fields');
+        return;
+      }
+
+      // Here you would typically make an API call to authenticate
+      alert('Sign in successful!');
+    });
+
+    // Auto-focus email field on page load
+    window.onload = () => {
+      focusOnStepInput(0);
+      progressBarFill.style.width = '50%'; // Start at 50% for first step
+    };
+  </script>
+</body>
+</html>
