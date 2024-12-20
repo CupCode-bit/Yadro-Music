@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Animations */
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideOut {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+
+      to {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .step.active {
+      animation: slideIn 0.5s ease-out;
+      display: block;
+    }
+
+    .step.inactive {
+      animation: slideOut 0.5s ease-out;
+      display: none;
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      background: #e4e4e4;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+      height: 10px;
+      margin-bottom: 20px;
+    }
+
+    .progress-bar-fill {
+      background: linear-gradient(to right, #A0EEAF, #008000);
+      height: 100%;
+      width: 0;
+      transition: width 0.3s ease-in-out;
+    }
+
+    /* Input Styling */
+    input {
+      border: 2px solid transparent;
+      transition: all 0.3s ease-in-out;
+      background: rgba(255, 255, 255, 0.9);
+      outline: none;
+      backdrop-filter: blur(4px);
+    }
+
+    input:focus {
+      border-color: #00c853;
+      box-shadow: 0 0 8px rgba(0, 200, 83, 0.8);
+      background: rgba(255, 255, 255, 1);
+    }
+
+    /* Error States */
+    .error-message {
+      color: #ff4444;
+      font-size: 14px;
+      margin-top: 4px;
+      opacity: 0;
+      transition: opacity 0.3s ease-out;
+      height: 0;
+    }
+
+    .error-message.visible {
+      opacity: 1;
+      height: auto;
+    }
+
+    .input-error {
+      border: 2px solid #ff4444 !important;
+      background-color: rgba(255, 68, 68, 0.1) !important;
+    }
+
+    .input-success {
+      border: 2px solid #00b34a !important;
+      background-color: rgba(0, 179, 74, 0.1) !important;
+    }
+
+    /* Container Styling */
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #121212;
+      color: white;
+    }
+
+    .right-section {
+      background: linear-gradient(135deg, #00c853, #00e676);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 200, 83, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .right-section:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      pointer-events: none;
+    }
+
+    .google-btn:hover img {
+      filter: brightness(0) invert(1);
+    }
+  </style>
+</head>
+
+<body class="h-screen flex items-center justify-center">
+  <div class="w-full max-w-6xl mx-auto flex items-center justify-center px-4 md:px-0">
+    <!-- Left Section -->
+    <div class="w-1/2 text-white text-center space-y-8">
+      <div class="flex items-center justify-center space-x-3">
+        <div class="w-16 h-16 rounded-full bg-green-500 text-black font-bold flex items-center justify-center text-2xl">
+          Y
+        </div>
+        <h2 class="text-4xl font-semibold tracking-wide">Yadro</h2>
+      </div>
+      <h1 class="text-6xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-600">
+        Welcome<br>Back
+      </h1>
+      <p class="text-gray-400 text-lg leading-relaxed">
+        Sign in to continue your journey.<br>
+        We've missed you!
+      </p>
+      <div class="mt-8">
+        <a href="/login/google" class="google-btn inline-flex items-center px-8 py-3 bg-transparent border-2 border-blue-500 text-blue-500 rounded-lg hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in-out font-semibold gap-2">
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiIHZpZXdCb3g9IjAgMCA0OCA0OCI+PHBhdGggZmlsbD0iIzQyODVmNCIgZD0iTTQ1LjEyIDI0LjVjMC0xLjU2LS4xNC0zLjA2LS40LTQuNUgyNHYzLjYxaDExLjg0YS45NiA5LjYgMCAwIDEtNC4zOCA2LjY0djUuNTJoNy4xYzQuMTYtMy44MyA2LjU2LTkuNDcgNi41Ni0xNi4yN3oiLz48cGF0aCBmaWxsPSIjMzRhODUzIiBkPSJNMjQgNDZjNS45NCAwIDEwLjkyLTEuOTcgMTQuNTYtNS4zM2wtNy4xLTUuNTJjLTEuOTcgMS4zMi00LjQ5IDIuMS03LjQ2IDIuMWMtNS43MyAwLTEwLjU4LTMuODctMTIuMzEtOS4wN0g0LjM0djUuN0M3Ljk2IDQxLjA3IDE1LjQgNDYgMjQgNDZ6Ii8+PHBhdGggZmlsbD0iI2ZiYmMwNSIgZD0iTTExLjY5IDI4LjE4QzExLjI1IDI2LjggMTEgMjUuMzUgMTEgMjMuODJzLjI1LTIuOTguNjktNC4zNnYtNS43SDQuMzRDMi44NSAxNy42NSAyIDIwLjczIDIgMjRzLjg1IDYuMzUgMi4zNCA5LjE4bDcuMzUtNS43eiIvPjxwYXRoIGZpbGw9IiNlYTQzMzUiIGQ9Ik0yNCA5Ljg1YzMuMjMgMCA2LjExIDEuMTEgOC4zOCAzLjI5bDYuMy02LjNDMzQuOTQgMi40NiAyOS45NSAwIDI0IDBjLTguNiAwLTE2LjA0IDQuOTMtMTkuNjYgMTIuMTJsNy4zNSA1LjdDMTMuNDIgMTMuNzIgMTguMjcgOS44NSAyNCA5Ljg1eiIvPjwvc3ZnPg==" alt="Google Icon" class="w-5 h-5 transition-all duration-300">
+          Sign in with Google
+        </a>
+      </div>
+      <div class="mt-8">
+        <a href="/signup" class="inline-block px-8 py-3 bg-transparent border-2 border-green-500 text-green-500 rounded-lg hover:bg-green-500 hover:text-white transition-all duration-300 ease-in-out font-semibold">
+          Don't have an account? Sign up
+        </a>
+      </div>
+    </div>
+
+    <!-- Right Section -->
+    <div class="w-1/2">
+      <div class="right-section p-10 shadow-2xl">
+        <div class="progress-bar">
+          <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+
+        <form id="login-form" class="space-y-6">
+          <div class="step active" id="step1">
+            <label for="email" class="text-white font-bold">What's your email address?</label>
+            <input type="email" id="email" placeholder="Email Address" class="w-full px-4 py-3 rounded-lg bg-white text-black mt-2">
+            <div class="error-message" id="email-error">Please enter a valid email address</div>
+          </div>
+
+          <div class="step inactive" id="step2">
+            <label for="password" class="text-white font-bold">Enter your password</label>
+            <input type="password" id="password" placeholder="Password" class="w-full px-4 py-3 rounded-lg bg-white text-black mt-2">
+            <div class="error-message" id="password-error">Password is required</div>
+
+            <div class="flex justify-between items-center mt-4">
+              <label class="flex items-center space-x-2">
+                <input type="checkbox" class="w-4 h-4">
+                <span class="text-white">Remember me</span>
+              </label>
+              <a href="/forgot-password" class="text-white hover:text-green-200">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="w-full px-6 py-3 bg-black text-white rounded-lg mt-6 hover:bg-white hover:text-black transition-all duration-300 font-semibold">
+              Sign In
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 1;
+    const steps = document.querySelectorAll('.step');
+    const progressBarFill = document.getElementById('progress-fill');
+
+    // Validation functions
+    const validators = {
+      'email': (value) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(value);
+      },
+      'password': (value) => {
+        return value.length >= 1;
+      }
+    };
+
+    function toggleError(inputId, show) {
+      const errorElement = document.getElementById(`${inputId}-error`);
+      const inputElement = document.getElementById(inputId);
+
+      if (show) {
+        errorElement.classList.add('visible');
+        inputElement.classList.add('input-error');
+        inputElement.classList.remove('input-success');
+      } else {
+        errorElement.classList.remove('visible');
+        inputElement.classList.remove('input-error');
+        inputElement.classList.add('input-success');
+      }
+    }
+
+    function debounce(func, wait) {
+      let timeout;
+      return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+      };
+    }
+
+    const validateInput = debounce((input) => {
+      const validator = validators[input.id];
+      if (validator) {
+        const isValid = validator(input.value);
+        toggleError(input.id, !isValid);
+      }
+    }, 300);
+
+    document.querySelectorAll('input').forEach(input => {
+      input.addEventListener('input', () => validateInput(input));
+
+      input.addEventListener('focus', () => {
+        const errorElement = document.getElementById(`${input.id}-error`);
+        errorElement.classList.remove('visible');
+      });
+
+      input.addEventListener('blur', () => {
+        const validator = validators[input.id];
+        if (validator) {
+          const isValid = validator(input.value);
+          toggleError(input.id, !isValid);
+        }
+      });
+    });
+
+    function validateStep(step) {
+      const input = steps[step - 1].querySelector('input');
+      const validator = validators[input.id];
+      const isValid = validator(input.value);
+      toggleError(input.id, !isValid);
+      return isValid;
+    }
+
+    // Enhanced next step handling
+    function nextStep(step) {
+      if (!validateStep(step)) {
+        return;
+      }
+
+      // Clear error message from current step
+      const currentInput = steps[step - 1].querySelector('input');
+      const errorElement = document.getElementById(`${currentInput.id}-error`);
+      errorElement.classList.add('hidden');
+
+      // Proceed to next step
+      steps[step - 1].classList.remove('active');
+      steps[step - 1].classList.add('inactive');
+
+      steps[step].classList.remove('inactive');
+      steps[step].classList.add('active');
+
+      progressBarFill.style.width = `${((step + 1) / steps.length) * 100}%`;
+
+      focusOnStepInput(step);
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && currentStep < steps.length) {
+        e.preventDefault();
+        if (validateStep(currentStep)) {
+          nextStep(currentStep);
+          currentStep++;
+        }
+      }
+    });
+
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      let isValid = true;
+      for (let i = 0; i < steps.length; i++) {
+        const input = steps[i].querySelector('input');
+        const validator = validators[input.id];
+        if (!validator(input.value)) {
+          isValid = false;
+          toggleError(input.id, true);
+        }
+      }
+
+      if (isValid) {
+        alert('Login successful!');
+        // Here you would typically handle the login request
+      }
+    });
+
+    // Initialize
+    window.onload = () => {
+      const firstInput = steps[0].querySelector('input');
+      firstInput.focus();
+      progressBarFill.style.width = '50%';
+    };
+  </script>
+</body>
+
+</html>
