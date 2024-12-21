@@ -7,7 +7,7 @@
   <title>Sign In Page</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Slide Animation */
+    /* Previous styles remain the same */
     @keyframes slideIn {
       from {
         transform: translateX(100%);
@@ -30,6 +30,28 @@
       }
     }
 
+    @keyframes slideInReverse {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideOutReverse {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+
     .step.active {
       animation: slideIn 0.5s ease-out;
       display: block;
@@ -40,7 +62,16 @@
       display: none;
     }
 
-    /* Progress Bar */
+    .step.active-reverse {
+      animation: slideInReverse 0.5s ease-out;
+      display: block;
+    }
+
+    .step.inactive-reverse {
+      animation: slideOutReverse 0.5s ease-out;
+      display: none;
+    }
+
     .progress-bar {
       background: #e4e4e4;
       border-radius: 6px;
@@ -57,7 +88,6 @@
       transition: width 0.3s ease-in-out;
     }
 
-    /* Input Field Styling */
     input {
       border: 2px solid transparent;
       transition: all 0.3s ease-in-out;
@@ -72,58 +102,64 @@
       color: #aaa;
     }
 
-    /* Right Section Background with Green Gradient */
     .right-section {
       background: linear-gradient(to bottom right, #00c853, #00e676);
       border-radius: 16px;
     }
 
-    /* Container Styling */
     body {
       font-family: 'Arial', sans-serif;
       background: #121212;
       color: white;
+      min-height: 100vh;
     }
 
-    .signin-button {
-      background: #121212;
-      color: white;
+    .signin-button, .back-button {
       transition: all 0.3s ease;
     }
 
-    .signin-button:hover {
+    .signin-button:hover, .back-button:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        padding: 2rem;
+      }
+      
+      .left-section, .right-section {
+        width: 100%;
+        margin: 1rem 0;
+      }
     }
   </style>
 </head>
 
-<body class="h-screen flex items-center justify-center">
-  <div class="w-full max-w-6xl mx-auto flex items-center justify-center px-4 md:px-0">
+<body class="flex items-center justify-center p-4">
+  <div class="container w-full max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8">
     
     <!-- Left Section -->
-    <div class="w-1/2 text-white text-center space-y-8">
+    <div class="w-full md:w-1/2 text-white text-center space-y-8 p-4">
       <div class="flex items-center justify-center space-x-3">
-        <!-- Logo -->
-        <div class="w-16 h-16 rounded-full bg-green-500 text-black font-bold flex items-center justify-center text-2xl">
+        <div class="w-12 md:w-16 h-12 md:h-16 rounded-full bg-green-500 text-black font-bold flex items-center justify-center text-xl md:text-2xl">
           Y
         </div>
-        <!-- Logo Text -->
-        <h2 class="text-4xl font-semibold tracking-wide">Yadro</h2>
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-wide">Yadro</h2>
       </div>
-      <!-- Main Heading -->
-      <h1 class="text-6xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-600">
+      <h1 class="text-4xl md:text-6xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-600">
         Welcome<br>Back
       </h1>
-      <p class="text-gray-400 text-lg leading-relaxed">
+      <p class="text-gray-400 text-base md:text-lg leading-relaxed">
         Sign in to continue your journey.<br>
         We've missed you!
       </p>
     </div>
 
     <!-- Right Section -->
-    <div class="w-1/2">
-      <div class="right-section p-10 shadow-2xl">
+    <div class="w-full md:w-1/2">
+      <div class="right-section p-6 md:p-10 shadow-2xl">
         <!-- Progress Bar -->
         <div class="progress-bar">
           <div class="progress-bar-fill" id="progress-fill"></div>
@@ -132,7 +168,7 @@
         <form id="signin-form" class="space-y-6">
           <!-- Step 1: Email -->
           <div class="step active" id="step1">
-            <label for="email" class="text-white text-lg">What's your email address?</label>
+            <label for="email" class="text-white text-base md:text-lg">What's your email address?</label>
             <input 
               type="email" 
               id="email" 
@@ -140,11 +176,20 @@
               placeholder="Enter your email"
               required
             >
+            <div class="mt-6 flex justify-end">
+              <button 
+                type="button"
+                onclick="nextStep(1)"
+                class="signin-button bg-black text-white px-6 py-2 rounded-lg font-semibold"
+              >
+                Next
+              </button>
+            </div>
           </div>
 
           <!-- Step 2: Password -->
           <div class="step inactive" id="step2">
-            <label for="password" class="text-white text-lg">Enter your password</label>
+            <label for="password" class="text-white text-base md:text-lg">Enter your password</label>
             <input 
               type="password" 
               id="password" 
@@ -152,24 +197,32 @@
               placeholder="Enter your password"
               required
             >
-            <div class="flex justify-between items-center mt-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mt-4 space-y-2 md:space-y-0">
               <label class="flex items-center space-x-2">
                 <input type="checkbox" class="w-4 h-4">
                 <span class="text-white">Remember me</span>
               </label>
               <a href="#" class="text-white hover:text-green-200">Forgot password?</a>
             </div>
-            <button 
-              type="submit" 
-              class="signin-button w-full py-3 rounded-lg font-semibold text-lg mt-6"
-            >
-              Sign In
-            </button>
+            <div class="mt-6 flex justify-between">
+              <button 
+                type="button"
+                onclick="previousStep()"
+                class="back-button bg-black/50 text-white px-6 py-2 rounded-lg font-semibold hover:bg-black/70"
+              >
+                Back
+              </button>
+              <button 
+                type="submit" 
+                class="signin-button bg-black text-white px-6 py-2 rounded-lg font-semibold"
+              >
+                Sign In
+              </button>
+            </div>
           </div>
         </form>
 
-        <!-- Sign Up Link -->
-        <p class="text-center text-white mt-6">
+        <p class="text-center text-white mt-6 text-sm md:text-base">
           Don't have an account? 
           <a href="#" class="font-semibold hover:text-green-200">Sign up</a>
         </p>
@@ -182,7 +235,6 @@
     const steps = document.querySelectorAll('.step');
     const progressBarFill = document.getElementById('progress-fill');
 
-    // Focus on the input of the current step
     const focusOnStepInput = (step) => {
       const input = steps[step].querySelector('input');
       input.focus();
@@ -191,7 +243,6 @@
     function nextStep(step) {
       const input = steps[step - 1].querySelector('input');
       
-      // Basic email validation for step 1
       if (step === 1) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(input.value)) {
@@ -200,31 +251,43 @@
         }
       }
 
-      // Hide current step
-      steps[step - 1].classList.remove('active');
+      steps[step - 1].classList.remove('active', 'active-reverse');
       steps[step - 1].classList.add('inactive');
 
-      // Show next step
-      steps[step].classList.remove('inactive');
+      steps[step].classList.remove('inactive', 'inactive-reverse');
       steps[step].classList.add('active');
 
-      // Update progress bar
       progressBarFill.style.width = `${((step + 1) / steps.length) * 100}%`;
 
-      // Focus on the next input field
       focusOnStepInput(step);
+      currentStep++;
     }
 
-    // Listen for "Enter" key press
+    function previousStep() {
+      if (currentStep > 1) {
+        const currentStepIndex = currentStep - 1;
+        const previousStepIndex = currentStepIndex - 1;
+
+        steps[currentStepIndex].classList.remove('active');
+        steps[currentStepIndex].classList.add('inactive-reverse');
+
+        steps[previousStepIndex].classList.remove('inactive');
+        steps[previousStepIndex].classList.add('active-reverse');
+
+        progressBarFill.style.width = `${(previousStepIndex + 1) / steps.length * 100}%`;
+
+        focusOnStepInput(previousStepIndex);
+        currentStep--;
+      }
+    }
+
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Enter' && currentStep < steps.length) {
         e.preventDefault();
         nextStep(currentStep);
-        currentStep++;
       }
     });
 
-    // Form submission
     document.getElementById('signin-form').addEventListener('submit', function(e) {
       e.preventDefault();
       
@@ -236,14 +299,12 @@
         return;
       }
 
-      // Here you would typically make an API call to authenticate
       alert('Sign in successful!');
     });
 
-    // Auto-focus email field on page load
     window.onload = () => {
       focusOnStepInput(0);
-      progressBarFill.style.width = '50%'; // Start at 50% for first step
+      progressBarFill.style.width = '50%';
     };
   </script>
 </body>
