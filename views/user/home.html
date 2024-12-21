@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yadro Music - Stream Your Favorite Songs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
+    <!-- Navigation -->
+    <nav class="bg-black/40 backdrop-blur-lg fixed w-full z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-full bg-green-500 text-black font-bold flex items-center justify-center text-xl">
+                        Y
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-semibold text-white">Yadro</span>
+                        <span class="text-sm text-green-500">Music</span>
+                    </div>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:block">
+                    <div class="flex items-center space-x-8">
+                        <a href="#discover" class="text-gray-300 hover:text-green-500 transition-colors duration-300">Discover</a>
+                        <a href="#playlists" class="text-gray-300 hover:text-green-500 transition-colors duration-300">Playlists</a>
+                        <a href="#premium" class="text-gray-300 hover:text-green-500 transition-colors duration-300">Premium</a>
+                    </div>
+                </div>
+
+                <!-- Auth Buttons -->
+                <div class="flex items-center space-x-4">
+                    <a href="/login" class="text-white hover:text-green-500 transition-colors duration-300">Login</a>
+                    <a href="/signup" class="inline-flex items-center px-4 py-2 border-2 border-green-500 text-green-500 rounded-lg hover:bg-green-500 hover:text-white transition-all duration-300 ease-in-out font-semibold">
+                        Try Free
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-6xl md:text-7xl font-bold text-white mb-8">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-600">
+                    Your Music, Your Way
+                </span>
+            </h1>
+            <p class="text-xl text-gray-400 mb-12 max-w-3xl mx-auto">
+                Stream millions of songs, create playlists, and discover new music. 
+                Join the ultimate music experience with Yadro Music.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <a href="/signup" class="px-8 py-4 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all duration-300 font-semibold min-w-[200px]">
+                    Start Free Trial
+                </a>
+                <a href="#premium" class="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg hover:bg-white hover:text-black transition-all duration-300 font-semibold min-w-[200px]">
+                    See Plans
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-4 bg-black/40">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center text-white mb-16">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-600">
+                    Why Choose Yadro Music
+                </span>
+            </h2>
+            <div class="grid md:grid-cols-3 gap-12">
+                <!-- Feature 1 -->
+                <div class="p-6 rounded-xl bg-black/60 border border-green-500/20">
+                    <div class="w-12 h-12 rounded-lg bg-green-500/20 flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">HD Sound Quality</h3>
+                    <p class="text-gray-400">Experience crystal clear audio with our HD streaming technology.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="p-6 rounded-xl bg-black/60 border border-green-500/20">
+                    <div class="w-12 h-12 rounded-lg bg-green-500/20 flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Smart Playlists</h3>
+                    <p class="text-gray-400">AI-powered playlists that learn your taste and grow with you.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="p-6 rounded-xl bg-black/60 border border-green-500/20">
+                    <div class="w-12 h-12 rounded-lg bg-green-500/20 flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Offline Mode</h3>
+                    <p class="text-gray-400">Download your favorite tracks and listen anywhere, anytime.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Plans -->
+    <section id="premium" class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center text-white mb-16">Choose Your Plan</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Free Plan -->
+                <div class="p-8 rounded-xl bg-black/60 border border-gray-800">
+                    <h3 class="text-2xl font-bold text-white mb-4">Free</h3>
+                    <p class="text-3xl font-bold text-white mb-6">$0<span class="text-sm font-normal text-gray-400">/month</span></p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center text-gray-400">
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Ad-supported listening
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Basic audio quality
+                        </li>
+                    </ul>
+                    <a href="/signup" class="block text-center px-6 py-3 border border-green-500 text-green-500 rounded-lg hover:bg-green-500 hover:text-white transition-all duration-300">Get Started</a>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="p-8 rounded-xl bg-gradient-to-b from-green-500/20 to-black/60 border border-green-500">
+                    <div class="inline-block px-4 py-1 rounded-full bg-green-500 text-white text-sm font-semibold mb-4">POPULAR</div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Premium</h3>
+                    <p class="text-3xl font-bold text-white mb-6">$9.99<span class="text-sm font-normal text-gray-400">/month</span></p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center text-gray-400">
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Ad-free listening
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            HD audio quality
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Offline mode
+                        </li>
+                    </ul>
+                    <a href="/signup" class="block text-center px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all duration-300">Get Premium</a>
+                </div>
+
+                <!-- Family Plan -->
+                <div class="p-8 rounded-xl bg-black/60 border border-gray-800">
+                    <h3 class="text-2xl font-bold text-white mb-4">Family</h3>
+                    <p class="text-3xl font-bold text-white mb-6">$14.99<span class="text-sm font-normal text-gray-400">/month</span></p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center text-gray-400">
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Up to 6 accounts
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            All Premium features
+                        </li>
+                    </ul>
+                    <a href="/signup" class="block text-center px-6 py-3 border border-green-500 text-green-500 rounded-lg hover:bg-green-500 hover:text-white transition-all duration-300">Choose Family</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black/60 py-12">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-green-500 text-black font-bold flex items-center justify-center text-lg">
+                        Y
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-xl font-semibold text-white">Yadro</span>
+                        <span class="text-sm text-green-500">Music</span>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="
