@@ -6,87 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Signup Page</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* Slide Animation */
-    @keyframes slideIn {
-      from {
-        transform: translateX(100%);
-        opacity: 0;
-      }
-
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
-
-    @keyframes slideOut {
-      from {
-        transform: translateX(0);
-        opacity: 1;
-      }
-
-      to {
-        transform: translateX(-100%);
-        opacity: 0;
-      }
-    }
-
-    .step.active {
-      animation: slideIn 0.5s ease-out;
-      display: block;
-    }
-
-    .step.inactive {
-      animation: slideOut 0.5s ease-out;
-      display: none;
-    }
-
-    /* Progress Bar */
-    .progress-bar {
-      background: #e4e4e4;
-      border-radius: 6px;
-      overflow: hidden;
-      position: relative;
-      height: 10px;
-      margin-bottom: 20px;
-    }
-
-    .progress-bar-fill {
-      background: linear-gradient(to right, #6a11cb, #2575fc);
-      height: 100%;
-      width: 0;
-      transition: width 0.3s ease-in-out;
-    }
-
-    /* Input Field Styling */
-    input {
-      border: 2px solid transparent;
-      transition: all 0.3s ease-in-out;
-    }
-
-    input:focus {
-      border-color: #00c853;
-      box-shadow: 0 0 8px rgba(0, 200, 83, 0.8);
-    }
-
-    input::placeholder {
-      color: #aaa;
-    }
-
-    /* Right Section Background with Green Gradient */
-    .right-section {
-      background: linear-gradient(to bottom right, #00c853, #00e676);
-      border-radius: 16px;
-    }
-
-    /* Container Styling */
-    body {
-      font-family: 'Arial', sans-serif;
-      background: #121212;
-      color: white;
-    }
-  </style>
+  <link rel="stylesheet" href="/css/signup.css">
 </head>
 
 <body class="h-screen flex items-center justify-center">
@@ -110,6 +30,18 @@
         Join us now and explore the best experience.<br>
         Your journey begins here.
       </p>
+      <div class="mt-8">
+        <a href="/signup/google" class="google-btn inline-flex items-center px-8 py-3 bg-transparent border-2 border-blue-500 text-blue-500 rounded-lg hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in-out font-semibold gap-2">
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiIHZpZXdCb3g9IjAgMCA0OCA0OCI+PHBhdGggZmlsbD0iIzQyODVmNCIgZD0iTTQ1LjEyIDI0LjVjMC0xLjU2LS4xNC0zLjA2LS40LTQuNUgyNHYzLjYxaDExLjg0YS45NiA5LjYgMCAwIDEtNC4zOCA2LjY0djUuNTJoNy4xYzQuMTYtMy44MyA2LjU2LTkuNDcgNi41Ni0xNi4yN3oiLz48cGF0aCBmaWxsPSIjMzRhODUzIiBkPSJNMjQgNDZjNS45NCAwIDEwLjkyLTEuOTcgMTQuNTYtNS4zM2wtNy4xLTUuNTJjLTEuOTcgMS4zMi00LjQ5IDIuMS03LjQ2IDIuMWMtNS43MyAwLTEwLjU4LTMuODctMTIuMzEtOS4wN0g0LjM0djUuN0M3Ljk2IDQxLjA3IDE1LjQgNDYgMjQgNDZ6Ii8+PHBhdGggZmlsbD0iI2ZiYmMwNSIgZD0iTTExLjY5IDI4LjE4QzExLjI1IDI2LjggMTEgMjUuMzUgMTEgMjMuODJzLjI1LTIuOTguNjktNC4zNnYtNS43SDQuMzRDMi44NSAxNy42NSAyIDIwLjczIDIgMjRzLjg1IDYuMzUgMi4zNCA5LjE4bDcuMzUtNS43eiIvPjxwYXRoIGZpbGw9IiNlYTQzMzUiIGQ9Ik0yNCA5Ljg1YzMuMjMgMCA2LjExIDEuMTEgOC4zOCAzLjI5bDYuMy02LjNDMzQuOTQgMi40NiAyOS45NSAwIDI0IDBjLTguNiAwLTE2LjA0IDQuOTMtMTkuNjYgMTIuMTJsNy4zNSA1LjdDMTMuNDIgMTMuNzIgMTguMjcgOS44NSAyNCA5Ljg1eiIvPjwvc3ZnPg==" alt="Google Icon" class="google-icon w-5 h-5">
+          Sign up with Google
+        </a>
+      </div>
+
+      <div class="mt-8">
+        <a href="/login" class="login-btn inline-block px-8 py-3 bg-transparent border-2 border-green-500 text-green-500 rounded-lg hover:bg-green-500 hover:text-white transition-all duration-300 ease-in-out font-semibold">
+          Already have an account? Login
+        </a>
+      </div>
     </div>
 
     <!-- Right Section -->
@@ -123,104 +55,85 @@
 
         <!-- Form Steps -->
         <form id="signup-form">
-          <!-- Step 1 -->
           <div class="step active" id="step1">
-            <label for="full-name" class="text-white">What's your full name?</label>
-            <input type="text" id="full-name" placeholder="Full Name" class="w-full px-4 py-3 rounded-lg bg-white text-black mt-2">
+            <label for="full-name" class="text-white font-bold">What's your full name?</label>
+            <input type="text" id="full-name" placeholder="Full Name" class="w-full px-4 py-3 rounded-lg bg-black/80 text-green-400 mt-2 border border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300">
+            <div class="error-message" id="full-name-error">Please enter your full name (at least 2 words)</div>
+            <!-- Back to Home Button -->
+            <a href="/" class="inline-flex items-center px-6 py-3 mt-6 text-white bg-transparent border-2 border-white rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300 ease-in-out gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+              Back to Home
+            </a>
           </div>
 
           <!-- Step 2 -->
           <div class="step inactive" id="step2">
-            <label for="email" class="text-white">What's your email address?</label>
-            <input type="email" id="email" placeholder="Email Address" class="w-full px-4 py-3 rounded-lg bg-white text-black mt-2">
+            <label for="email" class="text-white font-bold">What's your email address?</label>
+            <input type="email" id="email" placeholder="Email Address" class="w-full px-4 py-3 rounded-lg bg-black/80 text-cyan-400 mt-2 border border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300">
+            <div class="error-message" id="email-error">Please enter a valid email address</div>
+            <a href="/" class="inline-flex items-center px-6 py-3 mt-6 text-white bg-transparent border-2 border-white rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300 ease-in-out gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+              Back to Home
+            </a>
           </div>
 
           <!-- Step 3 -->
+          <!-- Phone number field should be added in Step 3 -->
           <div class="step inactive" id="step3">
-            <label for="phone" class="text-white">What's your phone number?</label>
+            <label for="phone" class="text-white font-bold">What's your phone number?</label>
             <input type="tel" id="phone" placeholder="Phone Number" class="w-full px-4 py-3 rounded-lg bg-white text-black mt-2">
+            <div class="error-message" id="phone-error">Please enter a valid phone number</div>
+            <a href="/" class="inline-flex items-center px-6 py-3 mt-6 text-white bg-transparent border-2 border-white rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300 ease-in-out gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+              Back to Home
+            </a>
           </div>
 
           <!-- Step 4 -->
           <div class="step inactive" id="step4">
-            <label for="password" class="text-white">Set a password</label>
-            <input type="password" id="password" placeholder="Password" class="w-full px-4 py-3 rounded-lg bg-white text-black mt-2">
+            <label for="password" class="text-white font-bold">Set a password</label>
+            <input type="password" id="password" placeholder="Password" class="w-full px-4 py-3 rounded-lg bg-black/80 text-red-400 mt-2 border border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300">
+            <div class="error-message" id="password-error">Password must be at least 8 characters with numbers and letters</div>
+            <a href="/" class="inline-flex items-center px-6 py-3 mt-6 text-white bg-transparent border-2 border-white rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300 ease-in-out gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+              Back to Home
+            </a>
           </div>
 
           <!-- Step 5 -->
           <div class="step inactive" id="step5">
-            <label for="confirm-password" class="text-white">Confirm your password</label>
-            <input type="password" id="confirm-password" placeholder="Confirm Password" class="w-full px-4 py-3 rounded-lg bg-white text-black mt-2">
-            <button type="submit" class="button-next mt-5">Submit</button>
+            <label for="confirm-password" class="text-white font-bold">Confirm your password</label>
+            <input type="password" id="confirm-password" placeholder="Confirm Password" class="w-full px-4 py-3 rounded-lg bg-white text-black mt-2 mb-6">
+            <div class="error-message" id="confirm-password-error">Passwords do not match</div>
+
+            <div class="button-group flex items-center justify-start gap-4 mt-6">
+              <button type="submit" class="button-next flex items-center justify-center min-w-[120px] px-6 py-3 rounded-lg">
+                Submit
+              </button>
+              <a href="/" class="inline-flex items-center px-6 py-3 text-white bg-transparent border-2 border-white rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300 ease-in-out gap-2 min-w-[160px]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                Back to Home
+              </a>
+            </div>
           </div>
-        </form>
       </div>
+      </form>
     </div>
   </div>
+  </div>
 
-  <!-- JavaScript for SPA Form -->
-  <script>
-    let currentStep = 1;
-    const steps = document.querySelectorAll('.step');
-    const progressBarFill = document.getElementById('progress-fill');
 
-    // Focus on the input of the first step
-    const focusOnStepInput = (step) => {
-      const input = steps[step].querySelector('input');
-      input.focus();
-    };
-
-    function nextStep(step) {
-      const input = steps[step - 1].querySelector('input');
-      if (input.value.trim() === '') {
-        alert('Please fill out this field.');
-        return;
-      }
-
-      // Hide current step
-      steps[step - 1].classList.remove('active');
-      steps[step - 1].classList.add('inactive');
-
-      // Show next step
-      steps[step].classList.remove('inactive');
-      steps[step].classList.add('active');
-
-      // Update progress bar
-      progressBarFill.style.width = `${((step + 1) / steps.length) * 100}%`;
-
-      // Focus on the next input field
-      focusOnStepInput(step);
-    }
-
-    // Listen for "Enter" key press
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        if (currentStep <= steps.length) {
-          nextStep(currentStep);
-          currentStep++;
-        }
-      }
-    });
-
-    // Form submission
-    document.getElementById('signup-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const password = document.getElementById('password').value;
-      const confirmPassword = document.getElementById('confirm-password').value;
-
-      if (password !== confirmPassword) {
-        alert('Passwords do not match!');
-      } else {
-        alert('Signup successful!');
-      }
-    });
-
-    // Focus on the first input field when the page loads
-    window.onload = () => {
-      focusOnStepInput(0); // Focus on the first input field
-    };
-  </script>
+  <script src="/js/signup.js"></script>
 </body>
 
 </html>
